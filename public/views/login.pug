@@ -1,9 +1,14 @@
 include partials/header.pug 
-    include partials/navbar.pug
-    #login-welcome
-        h1 Welcome to your Motivation! 
-    a(href="/login").button.button-warning Login 
-
-
-
-    include partials/footer.pug
+    link(rel="stylesheet", href="../styles/login_stylesheet.css")
+    #background 
+        #login-welcome 
+            .welcome-text 
+                h1 Welcome to your Motivation! 
+                h6 Are you ready to Improve Your Day?
+            .mid 
+                label.rocker
+                    input(type="checkbox" unchecked)
+                    span.switch-left Yes 
+                    span.switch-right Not Yet
+    script(src="../scripts/loginScripts.js") 
+            
