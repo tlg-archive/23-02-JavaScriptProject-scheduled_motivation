@@ -13,10 +13,8 @@ dotenv.config();
 // Templating for pug:
 app.set("views", "./public/views");
 app.set("view engine", "pug");
-app.use(express.static('./public'))
-// Bootstrap:
-// const bootstrap = require('bootstrap');
-// const mdb = require('mdb-ui-kit');
+app.use(express.static('./public'));
+
 
 const config = {
     authRequired: false,
@@ -54,7 +52,9 @@ app.get('/', (req, res) => {
     //         navbarTitle: 'Home'
     //     })
     // } else {
-        res.render('login', { pageTitle: 'Login'})
+        res.render('login', {
+            title: 'Scheduled Motivation',
+        })
     // }
 
 
