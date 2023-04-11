@@ -54,10 +54,19 @@ app.get('/', (req, res) => {
     //         navbarTitle: 'Home'
     //     })
     // } else {
-        res.render('login')
+        res.render('login', { pageTitle: 'Login'})
     // }
 
 
+})
+
+app.get('/new_video', (req, res) => {
+    // const pageTitle = 'New Video';
+    res.render('new_video', { pageTitle: 'New Video'});
+})
+
+app.get("/new_collection", (req, res) => {
+    res.render('new_collection', { pageTitle: 'New Collection'});
 })
 
 app.listen(port, () => {

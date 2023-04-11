@@ -1,24 +1,25 @@
 //- Navbar
-nav.navbar.navbar-light.light-blue.lighten-4   
+nav.navbar.navbar-light.light-blue.lighten-4
     //- Navbar Title (where are you)
-    a.navbar-brand(href="#") Navbar 
+    a.navbar-brand.px-3(href="#")= pageTitle
 
     //- Collapse:
-    button.navbar-toggler.toggler-example(type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" 
+    button.navbar-toggler.toggler-example(type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
         aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation")
         span.dark-blue-text
-            i.fas.fa-bars.fa-1x 
+            i.fas.fa-bars.fa-1x
 
     //- Collapsible Content
-    .collapse.navbar-collapse#navbarSupportedContent1 
-        ul.navbar-nav.mr-auto 
-            li.nav-item 
-                a.nav-link(href="#") Home 
-                    span.sr-only - Current 
-            li.nav-item 
-                a.nav-link(href="#") New Video 
-            li.nav-item 
-                a.nav-link(href="#") View Collections 
-            li.nav-item 
-                a.nav-link(href="#") Logout 
-
+    .collapse.navbar-collapse#navbarSupportedContent1.px-3
+        ul.navbar-nav.mr-auto
+            li.nav-item
+                a.nav-link(href="#") Home
+                    span.sr-only - Current
+            li.nav-item
+                a.nav-link(href="/new_video") New Video
+            li.nav-item
+                a.nav-link(href="/new_collection") New Collection
+            li.nav-item
+                a.nav-link(href="#") View Collections
+            li.nav-item
+                a.nav-link(href="#") Logout
