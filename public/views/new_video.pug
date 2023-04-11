@@ -1,0 +1,58 @@
+include partials/header.pug
+    include partials/navbar.pug
+    form.px-3.py-2(action="/submit-video" method="POST")
+        label.mx-1(for="collection") Collection:
+        div.form-group.row.mx-1
+            select#collection.form-control-lg(name="collection")
+                option(value="new_collection") New Collection
+                //- each collection in collections
+                //-     option(value=collection) #{collection}
+        div.form-group.row.mt-2
+            label.mx-1(for="url") URL:
+        div.form-group.row.mx-1
+            input#url.form-control-lg(name="url" type="text" placeholder="URL of YouTube video")
+        div.row.px-3.mt-2 Start Time
+        .form-group.row
+            div.col-sm-6
+                .row.mx-1 Minutes
+                .row.mx-1
+                    select.form-control-lg(name="start-minutes")
+                        - for (let i = 0; i < 6; i++) {
+                            option.form-control(value=i)= i
+                        - }
+            div.col-sm-6
+                .row.mx-1 Seconds
+                .row.mx-1
+                    select.form-control-lg(name="start-seconds")
+                        - for (let i = 0; i < 60; i++) {
+                            option(value=i)= i
+                        - }
+
+
+        //- .dropdown
+        //-     button.btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Button
+        //-     .div.dropdown-menu(aria-labelledby='dropdownMenueButton')
+        //-         a.dropdown-item(href="#") Option 1
+
+
+        div.row.px-3.mt-2 End Time
+        .form-group.row
+            div.col-sm-6
+                .row.mx-1 Minutes
+                .row.mx-1
+                    select.form-control-lg(name="end-minutes")
+                        - for (let i = 0; i < 6; i++) {
+                            option.form-control(value=i)= i
+                        - }
+            div.col-sm-6
+                .row.mx-1 Seconds
+                .row.mx-1
+                    select.form-control-lg(name="end-seconds")
+                        - for (let i = 0; i < 60; i++) {
+                            option(value=i)= i
+                        - }
+        .row.px-3.mt-2
+            button#inputButton.btn.btn-primary Submit
+
+
+    include partials/footer.pug

@@ -60,6 +60,15 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/new_video', (req, res) => {
+    // const pageTitle = 'New Video';
+    res.render('new_video', { pageTitle: 'New Video'});
+})
+
+app.get("/new_collection", (req, res) => {
+    res.render('new_collection', { pageTitle: 'New Collection'});
+})
+
 app.listen(port, () => {
     console.log(`scheduled_motivation app listening on port ${port}`);
 })
