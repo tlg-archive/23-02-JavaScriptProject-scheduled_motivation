@@ -1,0 +1,26 @@
+{
+  "name": "scheduled_motivation",
+  "version": "1.0.0",
+  "description": "https://docs.google.com/document/d/1VxXPdx6__gtG4hAhmj_4U5l6Re8pLht0OnOIDgicHg8/edit?usp=sharing",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.13.0",
+    "mdb-ui-kit": "^6.2.0",
+    "mdbootstrap": "^4.20.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22",
+    "pug": "^3.0.2"
+  }
+}
