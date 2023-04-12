@@ -44,18 +44,18 @@ async function createUser(user) {
  * Create a new Collection
  */
 async function createCollection(user, formData){
-    const workingUser = UserModel.findById(user.id);
-    let monday = ('monday' in formData.day) ? true : false;
-    let tuesday = ('tuesday' in formData.day) ? true : false;
-    let wednesday = ('wednesday' in formData.day) ? true : false;
-    let thursday = ('thursday' in formData.day) ? true : false;
-    let friday = ('friday' in formData.day) ? true : false;
-    let saturday = ('saturday' in formData.day) ? true : false;
-    let sunday = ('sunday' in formData.day) ? true : false;
-    let morning = ('morning' in formData.day) ? true : false;
-    let afternoon = ('afternoon' in formData.day) ? true : false;
-    let evening = ('evening' in formData.day) ? true : false;
+    
 
+    let monday = (formData.monday === "true") ? true : false;
+    let tuesday = (formData.tuesday === "true") ? true : false;
+    let wednesday = (formData.wednesday === "true") ? true : false;
+    let thursday = (formData.thursday === "true") ? true : false;
+    let friday = (formData.friday === "true") ? true : false;
+    let saturday = (formData.saturday === "true") ? true : false;
+    let sunday = (formData.sunday === "true") ? true : false;
+    let morning = (formData.morning === "true") ? true : false;
+    let afternoon = (formData.afternoon === "true") ? true : false;
+    let evening = (formData.evening === "true") ? true : false;
     const newCollection = {
       title: formData.title,
       days: {
@@ -73,9 +73,10 @@ async function createCollection(user, formData){
         evening : evening
       }
     }
+    console.log(user)
+    await UserModel.updateOne({ email : user.email}, 
+      {$push: {collections: newCollection}});
 
-    let save = await UserModel.findOneAndUpdate(id = workingUser, workingUser.collections.push(newCollection))
-    
 }
 
-module.exports = { userExists, createUser };
+module.exports = { userExists, createUser, createCollection };

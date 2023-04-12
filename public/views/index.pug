@@ -6,21 +6,27 @@ include partials/header
         when 'morning'
             #main-content.d-flex.flex-column.justify-content-around.align-items-center.morning
                 .fade-in 
-                    h3 Good Morning, #{user.given_name}
+                    h3 Good Morning, #{user.given_name}. Click to start your morning right.
                 a(href="/play/morning")#morning.button-17 Morning
                 a(href="/play/afternoon")#afternoon.button-17 Afternoon 
                 a(href="/play/evening")#evening.button-17 Evening
         when 'afternoon'
             #main-content.d-flex.flex-column.justify-content-around.align-items-center.afternoon
                 .fade-in
-                    h3 Good Afternoon, #{user.given_name}
+                    h3 Good Afternoon, #{user.given_name}.  Let's get you out of that noon slump.
                 a(href="/play/morning")#morning.button-17 Morning 
                 a(href="/play/afternoon")#afternoon.button-17 Afternoon 
                 a(href="/play/evening")#evening.button-17 Evening
         default 
             #main-content.d-flex.flex-column.justify-content-around.align-items-center.evening
+                div 
+                div 
+
                 .fade-in 
-                    h3 Good Evening, #{user.given_name}
+                    h3 Good Evening, #{user.given_name}. Click to start your wind down.
+                div 
+                div 
+
                 a(href="/play/morning").button-17 Morning 
                 a(href="/play/afternoon")#afternoon.button-17 Afternoon 
                 a(href="/play/evening")#evening.button-17 Evening
