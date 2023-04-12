@@ -1,0 +1,76 @@
+
+include partials/header.pug
+    //script(src="https://www.youtube.com/player_api")
+include partials/navbar.pug
+//AIzaSyCuw6F3-br4Fholj4HDCJlSHGDuBEWRZWo
+
+#player(style="width: 100vw; height: 100vh")
+script.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        let video1 = 'i27K2ry9jEo,Cx-sgFYXd2k,cjcodq_LZiY'
+
+        player = new YT.Player('player', {
+            videoId: 'i27K2ry9jEo',
+            playerVars: {
+                'playsinline': 0,
+                'fs': 1,
+                'playlist': video1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        })
+
+
+        //- player.cueVideoByUrl(mediaContentUrl:'https://www.youtube.com/watch?v=i27K2ry9jEo',
+        //-               startSeconds:14):Void
+        //- player.cueVideoByID({ videoId: video1,
+        //-                     startSeconds: 14,
+        //-                     endSeconds: 614}):Void
+
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+        //- player.setFullscreen(true);
+    }
+
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+
+
+//- script(src="https://www.youtube.com/player_api")
+//- script.
+//-   var player;
+//-   function onYouTubePlayerAPIReady() {
+//-     player = new YT.Player('player', {
+//-       videoId: 'i27K2ry9jEo',
+//-       playerVars: { 'fs': 1 }
+//-     });
+//-     player.addEventListener('onReady', function() {
+//-       player.playVideo();
+//-       player.setPlaybackQuality('hd1080');
+//-       player.setSize(window.innerWidth, window.innerHeight);
+//-       player.setFullscreen(true);
+//-     });
+//-   }
+
+
+include partials/footer.pug
+
