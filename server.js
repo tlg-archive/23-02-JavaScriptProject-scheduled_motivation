@@ -8,13 +8,14 @@ const dotenv = require("dotenv");
 const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
 app.use(express.json());
+const { timeOfDay } = require('./public/scripts/indexHandler.js')
 
 // app.use(logger("dev"));
 
 // Templating for pug:
 app.set("views", "./public/views");
 app.set("view engine", "pug");
-// app.use(express.static('./public'));
+app.use(express.static('./public'));
 
 const config = {
   authRequired: false,
@@ -60,6 +61,8 @@ app.get("/", async (req, res) => {
     res.render("index", {
       title: "Scheduled Motivation",
       navbarTitle: "Home",
+      timeOfDay: timeOfDay(),
+      user: user
     });
   } else {
     res.render("login", {
@@ -67,23 +70,6 @@ app.get("/", async (req, res) => {
     });
   }
 });
-// app.get('/callback', async (req, res) => {
-//     // Check if user is logged in!
-//     console.log(req.oid)
-//     if(req.oidc.isAuthenticated()){
-//         console.log("user",req.oidc);
-//         // let userExists = await UserCrud.userExists(req.oid);
-//         // if(!userExists) await UserCrud.createUser(req.oid);
-//         res.render('index', {
-//             title: 'Scheduled Motivation',
-//             navbarTitle: 'Home'
-//         })}
-//     else{
-//         res.render('index', {
-//             title: 'Scheduled Motivation',
-//             navbarTitle: 'Home'
-//         })}
-// })
 
 app.get("/play", (req, res) => {
   res.render("play", { pageTitle: "Play Videos" });
