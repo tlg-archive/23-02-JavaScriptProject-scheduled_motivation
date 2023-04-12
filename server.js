@@ -8,6 +8,7 @@ const dotenv = require("dotenv");
 const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 const { timeOfDay } = require('./public/scripts/indexHandler.js')
 
 // app.use(logger("dev"));
@@ -85,8 +86,15 @@ app.get("/new_video", (req, res) => {
 });
 
 app.get("/new_collection", (req, res) => {
+  console.log("Seeing if we still have the user",req.oidc.user);
   res.render("new_collection", { pageTitle: "New Collection" });
 });
+app.post("/new_collection", async (req, res) => {
+  const formData = req.body
+  console.log("Adding a new Collection:",formData);
+  await UserCrud.createCollection(userFromDb, formData);
+  res.render("new_video", { pageTitle: "New Video", user: user })
+})
 
 app.listen(port, () => {
   console.log(`scheduled_motivation app listening on port ${port}`);

@@ -23,45 +23,45 @@ const UserSchema = new mongoose.Schema({
             // required: true
         },
         days: {
-            isMonday: {
+            monday: {
                 type: Boolean,
                 default: false
             },
-            isTuesday: {
+            tuesday: {
                 type: Boolean,
                 default: false
             },
-            isWednesday: {
+            wednesday: {
                 type: Boolean,
                 default: false
             },
-            isThursday: {
+            thursday: {
                 type: Boolean,
                 default: false
             },
-            isFriday: {
+            friday: {
                 type: Boolean,
                 default: false
             },
-            isSaturday: {
+            saturday: {
                 type: Boolean,
                 default: false
             },
-            isSunday: {
+            sunday: {
                 type: Boolean,
                 default: false
             }
         },
         time: {
-            isMorning: {
+            morning: {
                 type: Boolean,
                 default: false
             },
-            isAfternoon: {
+            afternoon: {
                 type: Boolean,
                 default: false
             },
-            isFriday: {
+            evening: {
                 type: Boolean,
                 default: false
             }
