@@ -89,6 +89,10 @@ app.get('/', async (req, res) => {
     
 
 
+app.get("/play", (req, res) => {
+    res.render('play', { pageTitle: 'Play Videos'});
+})
+
 app.listen(port, () => {
     console.log(`scheduled_motivation app listening on port ${port}`);
 })
