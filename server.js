@@ -46,6 +46,7 @@ app.use((req, res, next) => {
 const db = require("./models/mongoose");
 const UserModel = require("./models/UserModel");
 const UserCrud = require("./models/userModelCrud");
+let userFromDb = null;
 
 const router = require("express").Router();
 /**
@@ -55,10 +56,13 @@ app.get("/", async (req, res) => {
   // Check if user is logged in!
   if (req.oidc.isAuthenticated()) {
     const user = req.oidc.user;
-    let userExists = await UserCrud.userExists(user);
-    if (!userExists) await UserCrud.createUser(user);
+    userFromDb = await UserCrud.userExists(user);
+    if (userFromDb.length === 0) {
+      userFromDb = await UserCrud.createUser(user);
+    }
     res.render("index", {
       title: "Scheduled Motivation",
+      pageTitle: userFromDb.given_name,
       navbarTitle: "Home",
     });
   } else {
@@ -91,7 +95,7 @@ app.get("/play", (req, res) => {
 
 app.get("/new_video", (req, res) => {
   // const pageTitle = 'New Video';
-  res.render("new_video", { pageTitle: "New Video" });
+  res.render("new_video", { pageTitle: "New Video", user: user });
 });
 
 app.get("/new_collection", (req, res) => {
