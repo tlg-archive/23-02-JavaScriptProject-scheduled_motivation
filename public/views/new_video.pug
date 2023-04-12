@@ -1,6 +1,8 @@
 include partials/header.pug
     include partials/navbar.pug
     form.px-3.py-2(action="/submit-video" method="POST")
+        - let collections = user;
+        - console.log(collections);
         label.mx-1(for="collection") Collection:
         div.form-group.row.mx-1
             select#collection.form-control-lg(name="collection")
@@ -28,11 +30,6 @@ include partials/header.pug
                             option(value=i)= i
                         - }
 
-
-        //- .dropdown
-        //-     button.btn.btn-secondary.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Button
-        //-     .div.dropdown-menu(aria-labelledby='dropdownMenueButton')
-        //-         a.dropdown-item(href="#") Option 1
 
 
         div.row.px-3.mt-2 End Time
