@@ -66,14 +66,14 @@ const UserSchema = new mongoose.Schema({
                 default: false
             }
         },
-        videos: {
+        videos: [{
             url: {
                 type: String,
                 default: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
             },
             startTime: Number,
             endTime: Number
-        }
+        }]
     }]
 })
 
