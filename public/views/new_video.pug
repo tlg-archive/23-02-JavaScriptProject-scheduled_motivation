@@ -1,7 +1,7 @@
 include partials/header.pug
     include partials/navbar.pug
     form.px-3.py-2(action="/submit-video" method="POST")
-        - let collections = user;
+        - let collections = user.collections;
         - console.log(collections);
         label.mx-1(for="collection") Collection:
         div.form-group.row.mx-1

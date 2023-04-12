@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 const db = require("./models/mongoose");
 const UserModel = require("./models/UserModel");
 const UserCrud = require("./models/userModelCrud");
-let userFromDb = null;
+var userFromDb = null;
 
 const router = require("express").Router();
 /**
@@ -59,7 +59,7 @@ app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     const user = req.oidc.user;
     userFromDb = await UserCrud.userExists(user);
-    if (userFromDb.length === 0) {
+    if (userFromDb === null) {
       userFromDb = await UserCrud.createUser(user);
     }
     res.render("index", {
@@ -82,12 +82,14 @@ app.get("/play", (req, res) => {
 
 app.get("/new_video", (req, res) => {
   // const pageTitle = 'New Video';
-  res.render("new_video", { pageTitle: "New Video", user: user });
+  console.log("This is userFromDb: " + userFromDb);
+  res.render("new_video", { pageTitle: "New Video", user: userFromDb });
 });
 
 app.get("/new_collection", (req, res) => {
-  console.log("Seeing if we still have the user",req.oidc.user);
-  res.render("new_collection", { pageTitle: "New Collection" });
+
+  res.render("new_collection", { pageTitle: "New Collection", user: userFromDb });
+
 });
 app.post("/new_collection", async (req, res) => {
   const formData = req.body
