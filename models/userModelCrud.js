@@ -37,4 +37,43 @@ async function createUser(user) {
   }
 }
 
+
+/**
+ * Create a new Collection
+ */
+async function createCollection(user, formData){
+    const workingUser = UserModel.findById(user.id);
+    let monday = ('monday' in formData.day) ? true : false;
+    let tuesday = ('tuesday' in formData.day) ? true : false;
+    let wednesday = ('wednesday' in formData.day) ? true : false;
+    let thursday = ('thursday' in formData.day) ? true : false;
+    let friday = ('friday' in formData.day) ? true : false;
+    let saturday = ('saturday' in formData.day) ? true : false;
+    let sunday = ('sunday' in formData.day) ? true : false;
+    let morning = ('morning' in formData.day) ? true : false;
+    let afternoon = ('afternoon' in formData.day) ? true : false;
+    let evening = ('evening' in formData.day) ? true : false;
+
+    const newCollection = {
+      title: formData.title,
+      days: {
+        monday : monday,
+        tuesday : tuesday,
+        wednesday : wednesday,
+        thursday : thursday,
+        friday : friday,
+        saturday : saturday,
+        sunday : sunday,
+      },
+      time : {
+        morning : morning,
+        afternoon : afternoon,
+        evening : evening
+      }
+    }
+
+    let save = await UserModel.findOneAndUpdate(id = workingUser, workingUser.collections.push(newCollection))
+    
+}
+
 module.exports = { userExists, createUser };

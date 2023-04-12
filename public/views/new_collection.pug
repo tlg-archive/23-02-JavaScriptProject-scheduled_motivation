@@ -1,6 +1,6 @@
 include partials/header.pug
     include partials/navbar.pug
-    form.px-3.py-2(action="/submit-video" method="POST")
+    form.px-3.py-2(action="/new_collection" method="POST")
 
         div.form-group.row.mt-2
             label.mx-1.fs-5(for="title") Title:
@@ -10,43 +10,43 @@ include partials/header.pug
             label.col-form-label-lg.fs-5 Days of the week
             div.col-6.px-3
                 div
-                    input#day1(type="checkbox" name="day1" value="Sunday")
+                    input#day1(type="checkbox" name="day" value="sunday")
                     label.mx-1.px-1(for="day1") Sun
                 div
-                    input#day2(type="checkbox" name="day2" value="Monday")
+                    input#day2(type="checkbox" name="day" value="monday")
                     label.mx-1.px-1(for="day2") Mon
                 div
-                    input#day3(type="checkbox" name="day3" value="Tuesday")
+                    input#day3(type="checkbox" name="day" value="tuesday")
                     label.mx-1.px-1(for="day3") Tue
                 div
-                    input#day4(type="checkbox" name="day4" value="Wednesday")
+                    input#day4(type="checkbox" name="day" value="wednesday")
                     label.mx-1.px-1(for='day4') Wed
             div.col-6.px-3
                 div
-                    input#day5(type="checkbox" name="day5" value="Thursday")
+                    input#day5(type="checkbox" name="day" value="thursday")
                     label.mx-1.px-1(for='day5') Thu
                 div
-                    input#day6(type="checkbox" name="day6" value="Friday")
+                    input#day6(type="checkbox" name="day" value="friday")
                     label.mx-1.px-1(for='day6') Fri
                 div
-                    input#day7(type="checkbox" name="day7" value="Saturday")
+                    input#day7(type="checkbox" name="day" value="saturday")
                     label.mx-1.px-1(for='day7') Sat
 
         div.form-group.row.px-1.mt-2
             label.col-form-label-lg.fs-5 Time of day
             div.mx-5
-                input#morn(type="checkbox" name="morn" value="morning")
+                input#morn(type="checkbox" name="timeOfDay" value="morning")
                 label.mx-1.px-1(for="morn") Morning
             div.mx-5
-                input#afternoon(type="checkbox" name="afternoon" value="afternoon")
+                input#afternoon(type="checkbox" name="timeOfDay" value="afternoon")
                 label.mx-1.px-1(for="afternoon") Afternoon
             div.mx-5
-                input#evening(type="checkbox" name="evening" value="evening")
+                input#evening(type="checkbox" name="timeOfDay" value="evening")
                 label.mx-1.px-1(for="evening") Evening
 
 
         .row.px-3.mt-2
-            button#newCollectionButton.btn.btn-primary Submit
+            button#newCollectionButton.btn.btn-primary(type="submit") Submit
 
 
     include partials/footer.pug
