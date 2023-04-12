@@ -5,8 +5,9 @@ const path = require("path");
 // const logger = require("morgan");
 const app = express();
 const dotenv = require("dotenv");
-// const { auth, requiresAuth } = require("express-openid-connect");
+const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
+app.use(express.json());
 
 // app.use(logger("dev"));
 
@@ -18,46 +19,78 @@ app.use(express.static('./public'));
 
 const config = {
     authRequired: false,
-    auth0Logout: true
+    auth0Logout: true,
+    secret: 'a long, randomly-generated string stored in env',
+    baseURL: 'http://localhost:3000',
+    clientID: 'fKMdzf0pdV2nymZRYKKkHGBCQzk5iwe0',
+    issuerBaseURL: 'https://dev-7ftej7mhmc6epege.us.auth0.com'
 }
 
 const port = process.env.PORT || 3000;
 if(!config.baseURL && !process.env.BASE_URL && process.env.PORT && process.env.NODE_ENV !== 'production') {
-    config.baseURL = `http://localhost:${port}`;
+    config.baseURL = `https://localhost:${port}`;
 }
 
-// app.use(auth(config))
+app.use(auth(config));
 
-// app.use((req, res, next) => {
-//     res.locals.user = req.oidc.user;
-//     next();
-// })
+app.use((req, res, next) => {
+    res.locals.user = req.oidc.user;
+    next();
+})
 
 
 // Mongo:
-// const db = require('./models/mongoose');
-// const CollectionModel = require('./models/CollectionModel')
-// const UserModel = require('./models/UserModel')
+const db = require('./models/mongoose');
+const UserModel = require('./models/UserModel')
+const UserCrud = require('./models/userModelCrud')
+
 
 
 const router = require('express').Router();
 /**
  * @desc Home Route.  Renders index.pug if user is logged in or login.pug if not
  */
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     // Check if user is logged in!
-    // if(req.oidc.isAuthenticated()){
-    //     res.render('index', {
-    //         title: 'Scheduled Motivation',
-    //         navbarTitle: 'Home'
-    //     })
-    // } else {
+    if(req.oidc.isAuthenticated()){
+        const user = req.oidc.user;
+        // let userExists = await UserCrud.userExists(user)
+        // if(!userExists) await UserCrud.createUser(user);
+        await UserCrud.createUser(user)
+        res.render('index', {
+            title: 'Scheduled Motivation',
+            navbarTitle: 'Home'
+        })
+    } else {
         res.render('login', {
             title: 'Scheduled Motivation',
         })
-    // }
+    }
+})
+// app.get('/callback', async (req, res) => {
+//     // Check if user is logged in!
+//     console.log(req.oid)
+//     if(req.oidc.isAuthenticated()){
+//         console.log("user",req.oidc);
+//         // let userExists = await UserCrud.userExists(req.oid);
+//         // if(!userExists) await UserCrud.createUser(req.oid);
+//         res.render('index', {
+//             title: 'Scheduled Motivation',
+//             navbarTitle: 'Home'
+//         })}
+//     else{
+//         res.render('index', {
+//             title: 'Scheduled Motivation',
+//             navbarTitle: 'Home'
+//         })}
+// })
+    
+    
+    
 
 
+app.get("/play", (req, res) => {
+    res.render('play', { pageTitle: 'Play Videos'});
 })
 
 app.get('/new_video', (req, res) => {
