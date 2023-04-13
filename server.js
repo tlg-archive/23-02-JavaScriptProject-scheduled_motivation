@@ -9,14 +9,16 @@ const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 const { timeOfDay, dayOfWeek } = require('./public/scripts/indexHandler.js')
+
 
 // app.use(logger("dev"));
 
 // Templating for pug:
 app.set("views", "./public/views");
 app.set("view engine", "pug");
-app.use(express.static('./public'));
+app.use(express.static("./public"));
 
 const config = {
   authRequired: false,
@@ -52,7 +54,6 @@ const UserCrud = require("./models/userModelCrud");
 var userFromDb = null;
 var getUser;
 
-
 const router = require("express").Router();
 /**
  * @desc Home Route.  Renders index.pug if user is logged in or login.pug if not
@@ -66,13 +67,12 @@ app.get("/", async (req, res) => {
       title: "Scheduled Motivation",
     });
   } else {
-
     res.render("index", {
       title: "Scheduled Motivation",
       pageTitle: userFromDb.given_name,
       navbarTitle: "Home",
       timeOfDay: timeOfDay(),
-      user: userFromDb
+      user: userFromDb,
     });
   }
 });
@@ -119,60 +119,84 @@ app.get("/new_video", async (req, res) => {
   // const pageTitle = 'New Video';
   userFromDb = await getUser(req);
 
+
   console.log("This is userFromDb: " + userFromDb);
-  res.render("new_video", { pageTitle: "New Video",
-   user: userFromDb,
-   collections: userFromDb.collections
+  res.render("new_video", {
+    pageTitle: "New Video",
+    user: userFromDb,
+    collections: userFromDb.collections,
   });
 });
 
 
 app.get("/new_collection", (req, res) => {
-  res.render("new_collection", { pageTitle: "New Collection", user: userFromDb });
+  res.render("new_collection", {
+    pageTitle: "New Collection",
+    user: userFromDb,
+  });
 });
 
 
 app.post("/new_collection", async (req, res) => {
-  const formData = req.body
+  const formData = req.body;
   const videoData = JSON.parse(formData.videoData);
   console.log("Adding a new Collection:", formData);
   console.log("VideoData is: ", videoData);
   await UserCrud.createCollection(userFromDb, formData, videoData);
-  res.render("new_video", { pageTitle: "New Video", user: userFromDb })
-})
+  res.render("new_video", { pageTitle: "New Video", user: userFromDb });
+});
 
 
 app.get("/view_collections", async (req, res) => {
   userFromDb = await getUser(req);
+
   res.render("view_collections", {
     pageTitle: "Your Collections",
     user: userFromDb,
     collections: userFromDb.collections,
-    })
-})
+  });
+});
 
 
 app.post("/new_video", async (req, res) => {
   const formData = req.body;
   console.log("Adding new video: ", formData);
-  if(UserCrud.extractYoutubeVideoId(formData.url) === null) {
-    res.render("new_video", { pageTitle: "Fix URL to add video", user: userFromDb})
-  }
-  else if(formData.collection === 'new_collection') {
-    res.render("new_collection",
-      { pageTitle: "New Collection", user: userFromDb, videoData: formData})
-  }
-  else {
+  if (UserCrud.extractYoutubeVideoId(formData.url) === null) {
+    res.render("new_video", {
+      pageTitle: "Fix URL to add video",
+      user: userFromDb,
+    });
+  } else if (formData.collection === "new_collection") {
+    res.render("new_collection", {
+      pageTitle: "New Collection",
+      user: userFromDb,
+      videoData: formData,
+    });
+  } else {
     await UserCrud.addNewVideo(userFromDb, formData);
     res.render("index", {
       title: "Scheduled Motivation",
       pageTitle: userFromDb.given_name,
       navbarTitle: "Home",
       timeOfDay: timeOfDay(),
-      user: userFromDb
+      user: userFromDb,
     });
   }
-})
+});
+
+// /**
+//  * Route for updating collection information
+//  */
+app.post("/update_collection/:title", async (req, res) => {
+  if (userFromDb === null) userFromDb = await getUser(req);
+  const formData = req.body;
+  UserCrud.updateCollection(userFromDb, req.params.title, formData);
+  res.render("view_collections", {
+    pageTitle: "Your Collections",
+    user: userFromDb,
+    collections: userFromDb.collections,
+  });
+});
 
 
 
