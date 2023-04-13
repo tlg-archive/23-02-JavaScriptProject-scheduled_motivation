@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 const { timeOfDay } = require('./public/scripts/indexHandler.js')
 
 // app.use(logger("dev"));
@@ -56,22 +56,18 @@ const router = require("express").Router();
  */
 app.get("/", async (req, res) => {
   // Check if user is logged in!
-  if (req.oidc.isAuthenticated()) {
-    const user = req.oidc.user;
-    userFromDb = await UserCrud.userExists(user);
-    if (userFromDb === null) {
-      userFromDb = await UserCrud.createUser(user);
-    }
+  userFromDb = await getUser(req);
+  if (userFromDb === null) {
+    res.render("login", {
+      title: "Scheduled Motivation",
+    });
+  } else {
     res.render("index", {
       title: "Scheduled Motivation",
       pageTitle: userFromDb.given_name,
       navbarTitle: "Home",
       timeOfDay: timeOfDay(),
-      user: user
-    });
-  } else {
-    res.render("login", {
-      title: "Scheduled Motivation",
+      user: userFromDb
     });
   }
 });
@@ -80,8 +76,10 @@ app.get("/play", (req, res) => {
   res.render("play", { pageTitle: "Play Videos" });
 });
 
-app.get("/new_video", (req, res) => {
+app.get("/new_video", async (req, res) => {
   // const pageTitle = 'New Video';
+  if(userFromDb === null) userFromDb = await getUser(req);
+
   console.log("This is userFromDb: " + userFromDb);
   res.render("new_video", { pageTitle: "New Video", user: userFromDb });
 });
@@ -93,7 +91,7 @@ app.get("/new_collection", (req, res) => {
 });
 app.post("/new_collection", async (req, res) => {
   const formData = req.body
-  console.log("Adding a new Collection:",formData);
+  console.log("Adding a new Collection:", formData);
   await UserCrud.createCollection(userFromDb, formData);
   res.render("new_video", { pageTitle: "New Video", user: user })
 })
@@ -103,3 +101,16 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
+async function getUser(request) {
+  if (request.oidc.isAuthenticated()) {
+    const user = request.oidc.user;
+    let dbUser = await UserCrud.userExists(user);
+    if (dbUser === null) {
+      dbUser = await UserCrud.createUser(user);
+    }
+    return dbUser;
+  } else {
+    return null;
+  }
+}
