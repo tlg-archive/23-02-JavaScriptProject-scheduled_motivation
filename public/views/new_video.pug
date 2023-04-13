@@ -20,14 +20,14 @@ include partials/header.pug
             div.col-sm-6
                 .row.mx-1 Minutes
                 .row.mx-1
-                    select.form-control-lg(name="start-minutes")
+                    select.form-control-lg(name="start_minutes")
                         - for (let i = 0; i < 6; i++) {
                             option.form-control(value=i)= i
                         - }
             div.col-sm-6
                 .row.mx-1 Seconds
                 .row.mx-1
-                    select.form-control-lg(name="start-seconds")
+                    select.form-control-lg(name="start_seconds")
                         - for (let i = 0; i < 60; i++) {
                             option(value=i)= i
                         - }
@@ -39,14 +39,14 @@ include partials/header.pug
             div.col-sm-6
                 .row.mx-1 Minutes
                 .row.mx-1
-                    select.form-control-lg(name="end-minutes")
+                    select.form-control-lg(name="end_minutes")
                         - for (let i = 0; i < 6; i++) {
                             option.form-control(value=i)= i
                         - }
             div.col-sm-6
                 .row.mx-1 Seconds
                 .row.mx-1
-                    select.form-control-lg(name="end-seconds")
+                    select.form-control-lg(name="end_seconds")
                         - for (let i = 0; i < 60; i++) {
                             option(value=i)= i
                         - }

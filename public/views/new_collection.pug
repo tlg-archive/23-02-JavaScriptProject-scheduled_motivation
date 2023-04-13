@@ -43,8 +43,8 @@ include partials/header.pug
             div.mx-5
                 input#evening(type="checkbox" name="evening" value="true")
                 label.mx-1.px-1(for="evening") Evening
-        
 
+        input(type="hidden" name="videoData" value=`${JSON.stringify(videoData)}`)
         .row.px-3.mt-2
             button#newCollectionButton.btn.btn-primary(type="submit") Submit
 
