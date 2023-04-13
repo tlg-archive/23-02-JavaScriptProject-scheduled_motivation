@@ -98,9 +98,31 @@ app.post("/new_collection", async (req, res) => {
   const formData = req.body
 
   console.log("Adding a new Collection:", formData);
-  await UserCrud.createCollection(userFromDb, formData);
-  res.render("new_video", { pageTitle: "New Video", user: user })
+  await UserCrud.createCollection(userFromDb, formData, videoData);
+  res.render("new_video", { pageTitle: "New Video", user: userFromDb })
 
+})
+
+app.post("/new_video", async (req, res) => {
+  const formData = req.body;
+  console.log("Adding new video: ", formData);
+  if(UserCrud.extractYoutubeVideoId(formData.url) === null) {
+    res.render("new_video", { pageTitle: "Fix URL to add video", user: userFromDb})
+  }
+  else if(formData.collection === 'new_collection') {
+    res.render("new_collection",
+      { pageTitle: "New Collection", user: userFromDb, videoData: formData})
+  }
+  else {
+    await UserCrud.addNewVideo(userFromDb, formData);
+    res.render("index", {
+      title: "Scheduled Motivation",
+      pageTitle: userFromDb.given_name,
+      navbarTitle: "Home",
+      timeOfDay: timeOfDay(),
+      user: userFromDb
+    });
+  }
 })
 
 app.listen(port, () => {
