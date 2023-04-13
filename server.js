@@ -86,13 +86,15 @@ app.get("/new_video", async (req, res) => {
   if(userFromDb === null) userFromDb = await getUser(req);
 
   console.log("This is userFromDb: " + userFromDb);
-  res.render("new_video", { pageTitle: "New Video", user: userFromDb });
+  res.render("new_video", { pageTitle: "New Video",
+   user: userFromDb,
+   collections: userFromDb.collections
+  });
 });
 
 app.get("/new_collection", (req, res) => {
 
   res.render("new_collection", { pageTitle: "New Collection", user: userFromDb });
-
 });
 app.post("/new_collection", async (req, res) => {
   const formData = req.body
@@ -100,7 +102,14 @@ app.post("/new_collection", async (req, res) => {
   console.log("Adding a new Collection:", formData);
   await UserCrud.createCollection(userFromDb, formData, videoData);
   res.render("new_video", { pageTitle: "New Video", user: userFromDb })
-
+})
+app.get("/view_collections", async (req, res) => {
+  if(userFromDb === null) userFromDb = await getUser(req);
+  res.render("view_collections", {
+    pageTitle: "Your Collections",
+    user: userFromDb,
+    collections: userFromDb.collections,
+    })
 })
 
 app.post("/new_video", async (req, res) => {

@@ -7,6 +7,8 @@ include partials/header.pug
         div.form-group.row.mx-1
             select#collection.form-control-lg(name="collection")
                 option(value="new_collection") New Collection
+                for collection in collections
+                    option(value=`${collection.title}`) #{ collection.title }
                 //- each collection in collections
                 //-     option(value=collection) #{collection}
         div.form-group.row.mt-2
