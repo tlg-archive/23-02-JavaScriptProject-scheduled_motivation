@@ -1,8 +1,8 @@
 include partials/header.pug
     include partials/navbar.pug
-    form.px-3.py-2.mt-5(action="/submit-video" method="POST")
-        - let collections = user.collections;
-        - console.log('ANDY YOURE A STAR');
+    form.px-3.py-2.mt-5(action="/new_video" method="POST")
+        //- - let collections = user.collections;
+        //- - console.log(collections);
         label.mx-1(for="collection") Collection:
         div.form-group.row.mx-1
             select#collection.form-control-lg(name="collection")
@@ -51,7 +51,7 @@ include partials/header.pug
                             option(value=i)= i
                         - }
         .row.px-3.mt-2
-            button#inputButton.btn.btn-primary Submit
+            button#inputButton.btn.btn-primary(type="submit") Submit
 
 
     include partials/footer.pug
