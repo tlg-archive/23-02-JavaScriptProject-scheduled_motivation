@@ -9,7 +9,9 @@ const { auth, requiresAuth } = require("express-openid-connect");
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const { timeOfDay } = require("./public/scripts/indexHandler.js");
+
+const { timeOfDay, dayOfWeek } = require('./public/scripts/indexHandler.js')
+
 
 // app.use(logger("dev"));
 
@@ -75,13 +77,48 @@ app.get("/", async (req, res) => {
   }
 });
 
+
 app.get("/play", (req, res) => {
   res.render("play", { pageTitle: "Play Videos" });
 });
 
+
+app.get("/play/morning", async (req, res) => {
+  userFromDb = await getUser(req);
+  res.render("play", { pageTitle: "Play Videos" });
+});
+
+
+app.get("/play/afternoon", async (req, res) => {
+  userFromDb = await getUser(req);
+  collections = userFromDb.collections;
+
+  let videos = collections.filter(collection => {
+    return collection.days[dayOfWeek()];
+  })
+
+  let playlist = videos.map(list => {
+    //for (let i = 0; i < list.videos.length; i++) {
+      let vid = (list.videos[Math.floor(Math.random() * list.videos.length)]);
+      return UserCrud.extractYoutubeVideoId(vid.url);
+  //  }
+  })
+  playlist = "'" + playlist.join(',') + "'";
+
+  res.render("play", { pageTitle: "Play Videos", playlist: playlist });
+});
+
+
+app.get("/play/evening", async (req, res) => {
+  userFromDb = await getUser(req);
+  res.render("play", { pageTitle: "Play Videos" });
+});
+
+
 app.get("/new_video", async (req, res) => {
   // const pageTitle = 'New Video';
-  if (userFromDb === null) userFromDb = await getUser(req);
+  userFromDb = await getUser(req);
+
 
   console.log("This is userFromDb: " + userFromDb);
   res.render("new_video", {
@@ -91,12 +128,14 @@ app.get("/new_video", async (req, res) => {
   });
 });
 
+
 app.get("/new_collection", (req, res) => {
   res.render("new_collection", {
     pageTitle: "New Collection",
     user: userFromDb,
   });
 });
+
 
 app.post("/new_collection", async (req, res) => {
   const formData = req.body;
@@ -107,14 +146,17 @@ app.post("/new_collection", async (req, res) => {
   res.render("new_video", { pageTitle: "New Video", user: userFromDb });
 });
 
+
 app.get("/view_collections", async (req, res) => {
-  if (userFromDb === null) userFromDb = await getUser(req);
+  userFromDb = await getUser(req);
+
   res.render("view_collections", {
     pageTitle: "Your Collections",
     user: userFromDb,
     collections: userFromDb.collections,
   });
 });
+
 
 app.post("/new_video", async (req, res) => {
   const formData = req.body;
@@ -155,6 +197,8 @@ app.post("/update_collection/:title", async (req, res) => {
     collections: userFromDb.collections,
   });
 });
+
+
 
 app.listen(port, () => {
   console.log(`scheduled_motivation app listening on port ${port}`);
