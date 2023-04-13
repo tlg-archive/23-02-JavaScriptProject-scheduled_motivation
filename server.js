@@ -102,7 +102,6 @@ app.get("/new_video", async (req, res) => {
   userFromDb = await getUser(req);
 
 
-  console.log("This is userFromDb: " + userFromDb);
   res.render("new_video", {
     pageTitle: "New Video",
     user: userFromDb,
@@ -122,10 +121,11 @@ app.get("/new_collection", (req, res) => {
 app.post("/new_collection", async (req, res) => {
   const formData = req.body;
   const videoData = JSON.parse(formData.videoData);
-  console.log("Adding a new Collection:", formData);
-  console.log("VideoData is: ", videoData);
   await UserCrud.createCollection(userFromDb, formData, videoData);
-  res.render("new_video", { pageTitle: "New Video", user: userFromDb });
+  res.render("new_video", { 
+    pageTitle: "New Video", 
+    user: userFromDb, 
+    collections: userFromDb.collections});
 });
 
 
@@ -142,7 +142,6 @@ app.get("/view_collections", async (req, res) => {
 
 app.post("/new_video", async (req, res) => {
   const formData = req.body;
-  console.log("Adding new video: ", formData);
   if (UserCrud.extractYoutubeVideoId(formData.url) === null) {
     res.render("new_video", {
       pageTitle: "Fix URL to add video",
@@ -171,7 +170,7 @@ app.post("/new_video", async (req, res) => {
 //  * Route for updating collection information
 //  */
 app.post("/update_collection/:title", async (req, res) => {
-  if (userFromDb === null) userFromDb = await getUser(req);
+  userFromDb = await getUser(req);
   const formData = req.body;
   UserCrud.updateCollection(userFromDb, req.params.title, formData);
   res.render("view_collections", {
