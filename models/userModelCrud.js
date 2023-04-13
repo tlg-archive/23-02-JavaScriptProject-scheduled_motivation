@@ -42,8 +42,6 @@ async function createUser(user) {
  * Create a new Collection
  */
 async function createCollection(user, formData){
-    
-
     let monday = (formData.monday === "true") ? true : false;
     let tuesday = (formData.tuesday === "true") ? true : false;
     let wednesday = (formData.wednesday === "true") ? true : false;
@@ -74,7 +72,14 @@ async function createCollection(user, formData){
     console.log(user)
     await UserModel.updateOne({ email : user.email}, 
       {$push: {collections: newCollection}});
+}
 
+
+/**
+ * Update collections (from view_collections.pug onclick function)
+ */
+async function updateCollection(title, days, times){
+  
 }
 
 module.exports = { userExists, createUser, createCollection };

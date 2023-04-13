@@ -1,12 +1,14 @@
 include partials/header.pug
     include partials/navbar.pug
     form.px-3.py-2.mt-5(action="/submit-video" method="POST")
-        //- - let collections = user.collections;
-        //- - console.log(collections);
+        - let collections = user.collections;
+        - console.log('ANDY YOURE A STAR');
         label.mx-1(for="collection") Collection:
         div.form-group.row.mx-1
             select#collection.form-control-lg(name="collection")
                 option(value="new_collection") New Collection
+                for collection in collections
+                    option(value=`${collection.title}`) #{ collection.title }
                 //- each collection in collections
                 //-     option(value=collection) #{collection}
         div.form-group.row.mt-2
