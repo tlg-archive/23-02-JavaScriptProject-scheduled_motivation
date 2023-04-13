@@ -42,8 +42,8 @@ async function createUser(user) {
  * Create a new Collection
  */
 async function createCollection(user, formData, videoData) {
-  let startTime = videoData.start - minutes * 60 + videoData.start - seconds;
-  let endTime = videoData.end - minutes * 60 + videoData.end - seconds;
+  let startTime = videoData.start_minutes * 60 + videoData.start_seconds;
+  let endTime = videoData.end_minutes * 60 + videoData.end_seconds;
 
   const newVideo = {
     url: videoData.url,
@@ -86,17 +86,18 @@ async function createCollection(user, formData, videoData) {
 
 }
 
-async function addNewVideo(user, formData) {
-  let startTime = videoData.start - minutes * 60 + videoData.start - seconds;
-  let endTime = videoData.end - minutes * 60 + videoData.end - seconds;
+async function addNewVideo(user, videoData) {
+  // make these integers NOT string
+  let startTime = videoData.start_minutes * 60 + videoData.start_seconds;
+  let endTime = videoData.end_minutes * 60 + videoData.end_seconds;
   const newVideo = {
-    url: formData.url,
+    url: videoData.url,
     startTime: startTime,
     endTime: endTime
   }
 
   const newCollectionsArray = user.collections;
-  newCollectionsArray.find(collection => collection.title === formData.collection).videos.push(newVideo);
+  newCollectionsArray.find(collection => collection.title === videoData.collection).videos.push(newVideo);
 
   await UserModel.updateOne(
     { email: user.email },
