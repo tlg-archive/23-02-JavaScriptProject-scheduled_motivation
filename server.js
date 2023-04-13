@@ -78,41 +78,23 @@ app.get("/", async (req, res) => {
 });
 
 
-app.get("/play", (req, res) => {
-  res.render("play", { pageTitle: "Play Videos" });
-});
-
-
-app.get("/play/morning", async (req, res) => {
-  userFromDb = await getUser(req);
-  res.render("play", { pageTitle: "Play Videos" });
-});
-
-
-app.get("/play/afternoon", async (req, res) => {
+app.get("/play/:time", async (req, res) => {
   userFromDb = await getUser(req);
   collections = userFromDb.collections;
 
   let videos = collections.filter(collection => {
-    return collection.days[dayOfWeek()];
-  })
+    return collection.days[dayOfWeek()] && collection.time[req.params.time];
+  });
 
   let playlist = videos.map(list => {
-    //for (let i = 0; i < list.videos.length; i++) {
-      let vid = (list.videos[Math.floor(Math.random() * list.videos.length)]);
-      return UserCrud.extractYoutubeVideoId(vid.url);
-  //  }
+    let vid = (list.videos[Math.floor(Math.random() * list.videos.length)]);
+    return UserCrud.extractYoutubeVideoId(vid.url);
   })
   playlist = "'" + playlist.join(',') + "'";
 
   res.render("play", { pageTitle: "Play Videos", playlist: playlist });
 });
 
-
-app.get("/play/evening", async (req, res) => {
-  userFromDb = await getUser(req);
-  res.render("play", { pageTitle: "Play Videos" });
-});
 
 
 app.get("/new_video", async (req, res) => {
@@ -171,6 +153,7 @@ app.post("/new_video", async (req, res) => {
       pageTitle: "New Collection",
       user: userFromDb,
       videoData: formData,
+      collections: userFromDb.collections
     });
   } else {
     await UserCrud.addNewVideo(userFromDb, formData);
