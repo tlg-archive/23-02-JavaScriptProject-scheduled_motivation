@@ -10,14 +10,14 @@ include partials/header
         .accordion.accordion-borderless#accordionFlushExampleX
             for collection in collections     
                 .accordion-item 
-                    form 
-                        h2.accordion-header(id=`flush-heading${flushNum}`)
+                    form(action=`update_collection/${collection.title}`, method="POST") 
+                        h2.accordion-header(id=`flush-heading${flushNum}`) 
                             button.accordion-button(type="button" data-mdb-toggle="collapse" data-mdb-target=`#flush-collapse${flushNum}` aria-expanded="false" aria-controls=`flush-collapse${flushNum}`).
                                 #{collection.title}
                         .accoridon-collapse.collapse(id=`flush-collapse${flushNum}` aria-labelledby=`flush-heading${flushNum}` data-mdb-parent="#accordionFlushExampleX")
                             .accordion-body
                                 h3 Title: 
-                                    input(type="text", name="", value=`${collection.title}`)
+                                    input(type="text", name="title", value=`${collection.title}`)
                                 h3 Days:
                                 p Monday
                                     if collection.days.monday === true

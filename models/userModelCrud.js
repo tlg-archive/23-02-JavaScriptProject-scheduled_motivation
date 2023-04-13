@@ -83,7 +83,6 @@ async function createCollection(user, formData, videoData) {
   console.log(user)
   await UserModel.updateOne({ email: user.email },
     { $push: { collections: newCollection } });
-
 }
 
 async function addNewVideo(user, videoData) {
@@ -118,4 +117,37 @@ function extractYoutubeVideoId(url) {
 }
 
 
-module.exports = { userExists, createUser, createCollection, addNewVideo, extractYoutubeVideoId };
+async function updateCollection(userFromDb, collectionTitle, formData){
+  console.log(`userFromDb: ${userFromDb}\nUser Collection: ${ collectionTitle } \nFormData: ${formData}`);
+  const userId = userFromDb._id
+  let monday = (formData.monday === 'on') ? true : false;
+  let tuesday = (formData.tuesday === 'on') ? true : false;
+  let wednesday = (formData.wednesday === 'on') ? true : false;
+  let thursday = (formData.thursday === 'on') ? true : false;
+  let friday = (formData.friday === 'on') ? true : false;
+  let saturday = (formData.saturday === 'on') ? true : false;
+  let sunday = (formData.sunday === 'on') ? true : false;
+  let morning = (formData.morning === 'on') ? true : false;
+  let afternoon = (formData.afternoon === 'on') ? true : false;
+  let evening = (formData.evening === 'on') ? true : false;
+  let title = formData.title
+  UserModel.findOne({ _id: userId })
+    .then((user) => {
+      const i = user.collections.findIndex(collection => collection.title === collectionTitle);
+      user.collections[i].days.monday = monday;
+      user.collections[i].days.tuesday = tuesday;
+      user.collections[i].days.wednesday = wednesday;
+      user.collections[i].days.thursday = thursday;
+      user.collections[i].days.friday = friday;
+      user.collections[i].days.saturday = saturday;
+      user.collections[i].days.sunday = sunday;
+      user.collections[i].time.morning = morning;
+      user.collections[i].time.afternoon = afternoon;
+      user.collections[i].time.evening = evening;
+      user.collections[i].title = title;
+      return user.save();
+    })
+
+}
+
+module.exports = { userExists, createUser, createCollection, addNewVideo, extractYoutubeVideoId, updateCollection };
