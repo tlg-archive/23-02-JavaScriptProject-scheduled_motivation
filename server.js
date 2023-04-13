@@ -136,6 +136,15 @@ app.post("/new_video", async (req, res) => {
   }
 })
 
+
+
+/**
+ * Route for updating collection information
+ */
+app.post()
+
+
+
 app.listen(port, () => {
   console.log(`scheduled_motivation app listening on port ${port}`);
 });
