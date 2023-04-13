@@ -93,16 +93,18 @@ app.get("/new_video", async (req, res) => {
 });
 
 app.get("/new_collection", (req, res) => {
-
   res.render("new_collection", { pageTitle: "New Collection", user: userFromDb });
 });
+
 app.post("/new_collection", async (req, res) => {
   const formData = req.body
-
+  const videoData = JSON.parse(formData.videoData);
   console.log("Adding a new Collection:", formData);
+  console.log("VideoData is: ", videoData);
   await UserCrud.createCollection(userFromDb, formData, videoData);
   res.render("new_video", { pageTitle: "New Video", user: userFromDb })
 })
+
 app.get("/view_collections", async (req, res) => {
   if(userFromDb === null) userFromDb = await getUser(req);
   res.render("view_collections", {
