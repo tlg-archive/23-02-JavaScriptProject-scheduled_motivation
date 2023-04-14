@@ -1,13 +1,12 @@
 include partials/header.pug
     include partials/navbar.pug
-    div(style="height: 20px; width: 100vw")
-        .bg-image(style="height: 100vh; background-color: black")
-            img(src="../assets/youtubelogo.jpg").w-100
+    //-div(style="height: 60px; width: 100vw")
+    div.custom-background(style="height: calc(100vh - 48px)")
 
-            form.px-3.py-2.mt-5(action="/new_video" method="POST").mask.mask-custom.text-light
+            form.px-3.py-2.mt-5(action="/new_video" method="POST")
                 //- - let collections = user.collections;
                 //- - console.log(collections);
-                label.mx-1(for="collection") Collection:
+                label.mx-1.mt-3(for="collection") Collection:
                 div.form-group.row.mx-1
                     select#collection.form-control-lg(name="collection")
                         option(value="new_collection") New Collection
