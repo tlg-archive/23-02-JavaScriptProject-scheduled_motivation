@@ -8,24 +8,25 @@ include partials/header
     #collections-container.d-flex.flex-column.align-items-left.custom-background(style="height: 200vh")
         //- img(src="../assets/lofi.jpg").w-100
         - var flushNum = 1
-        .accordion.accordion-borderless#accordionFlushExampleX
+        .accordion.accordion-borderless#accordionFlushExampleX.pt-3
             for collection in collections
-                .accordion-item
-                    form.form-check(action=`update_collection/${collection.title}`, method="POST")
-                        h2.accordion-header(id=`flush-heading${flushNum}`)
+                .accordion-item.d-flex.justify-content-center
+                    form.form-check(action=`update_collection/${collection.title}`, method="POST").mx-auto
+                        h2.accordion-header(id=`flush-heading${flushNum}` style="min-width: 290px").mr-2
                             button.accordion-button(type="button" data-mdb-toggle="collapse" data-mdb-target=`#flush-collapse${flushNum}` aria-expanded="false" aria-controls=`flush-collapse${flushNum}`).
                                 #{collection.title}
                         .accoridon-collapse.collapse(id=`flush-collapse${flushNum}` aria-labelledby=`flush-heading${flushNum}` data-mdb-parent="#accordionFlushExampleX")
                             .accordion-body
-                                .card 
-                                    .card-body.container
-                                        h3.card-title Title:
-                                        input.card-text(type="text", name="title", value=`${collection.title}`)
+                                .card.px-2
+                                    .card-body.container.d-flex.align-items-center.p-2.mt-1
+                                        h3.card-title.mb-0(style="padding-right: 6px") Title:
+                                        input.card-text.ml-2.pl-2(type="text", name="title", value=`${collection.title}`)
+
                                     ul.list-group.list-group-light
                                         .row.align-items-center
                                             .col.col-1
-                                                
-                                            .col 
+
+                                            .col
                                                 h3 Days:
                                                 li.px3.font-weight-light Monday
                                                     if collection.days.monday === true
@@ -62,7 +63,7 @@ include partials/header
                                                         input.form-check-input(type="checkbox", name="sunday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="sunday")
-                                            .col 
+                                            .col
                                                 h3 Times:
                                                 li.px3.font-weight-light Morning
                                                     if collection.time.morning === true
@@ -81,14 +82,14 @@ include partials/header
                                                         input.form-check-input(type="checkbox", name="evening")
                                     .row.align-items-center
                                         .col
-                                            button(type="submit", value="Submit").btn.btn-success.btn-rounded Update
+                                            button(type="submit", value="Submit").btn.btn-success.btn-rounded.m-2 Update
                                         .col
-                                            a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
+                                            a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded.m-2 Delete
 
 
-                                            
 
-            
+
+
                 - flushNum = flushNum + 1;
             a.btn.btn-info.btn-rounded(href="/new_video" style="width:80vw; padding: 20px; margin: 30px;") Let's Make a new one!
 
