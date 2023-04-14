@@ -24,7 +24,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: "a long, randomly-generated string stored in env",
-  baseURL: "http://localhost:3000",
+  baseURL: "https://scheduled-motivation.herokuapp.com/",
   clientID: "fKMdzf0pdV2nymZRYKKkHGBCQzk5iwe0",
   issuerBaseURL: "https://dev-7ftej7mhmc6epege.us.auth0.com",
 };
