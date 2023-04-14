@@ -5,7 +5,7 @@ include partials/header
 
 
     div(style="height: 62px; width: 100vw")
-    #collections-container.d-flex.flex-column(style="height: 100vh").bg-image.align-items-center
+    #collections-container.d-flex.flex-column.bg-image.align-items-center
         img(src="../assets/lofi.jpg").w-100
         - var flushNum = 1
         .accordion.accordion-borderless#accordionFlushExampleX.mask.mask-custom
@@ -65,7 +65,7 @@ include partials/header
                                                     else
                                                         input.form-check-input(type="checkbox", name="sunday")
                                             .col 
-                                                h3 Times of Day:
+                                                h3 Times:
                                                 li.list-group-item.px3.font-weight-light Morning
                                                     if collection.time.morning === true
                                                         input.form-check-input(type="checkbox", name="morning" checked)
