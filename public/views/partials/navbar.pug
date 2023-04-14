@@ -1,6 +1,8 @@
 //- Navbar
 nav.navbar.navbar-light.light-blue.lighten-4.fixed-top(style={background:'white'})
     //- Navbar Title (where are you)
+    a.px-3(href="/")
+        img(src="../../assets/home.png" style="height: 30px; width: 30px")
     a.navbar-brand.px-3(href="#")= pageTitle
 
     //- Collapse:
@@ -14,12 +16,10 @@ nav.navbar.navbar-light.light-blue.lighten-4.fixed-top(style={background:'white'
     .collapse.navbar-collapse#navbarSupportedContent1.px-3
         ul.navbar-nav.mr-auto
             li.nav-item
-                a.nav-link(href="#") Home
+                a.nav-link(href="/") Home
                     span.sr-only - Current
             li.nav-item
                 a.nav-link(href="/new_video") New Video
-            li.nav-item
-                a.nav-link(href="/play") Play
             li.nav-item
                 a.nav-link(href="view_collections") View Collections
             li.nav-item

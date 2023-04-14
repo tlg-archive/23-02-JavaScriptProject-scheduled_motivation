@@ -1,86 +1,86 @@
-include partials/header 
+include partials/header
     link(rel="stylesheet", href="../styles/view_collections_stylesheet.css")
-    include partials/navbar 
+    include partials/navbar
 
-    h1 Testing
-    
-    
-    #collections-container.d-flex.flex-column
+
+
+    div(style="height: 70px; width: 100vw")
+    #collections-container.d-flex.flex-column(style="width: 100vw")
         - var flushNum = 1
         .accordion.accordion-borderless#accordionFlushExampleX
-            for collection in collections     
-                .accordion-item 
-                    form(action=`update_collection/${collection.title}`, method="POST") 
-                        h2.accordion-header(id=`flush-heading${flushNum}`) 
+            for collection in collections
+                .accordion-item
+                    form(action=`update_collection/${collection.title}`, method="POST")
+                        h2.accordion-header(id=`flush-heading${flushNum}`)
                             button.accordion-button(type="button" data-mdb-toggle="collapse" data-mdb-target=`#flush-collapse${flushNum}` aria-expanded="false" aria-controls=`flush-collapse${flushNum}`).
                                 #{collection.title}
                         .accoridon-collapse.collapse(id=`flush-collapse${flushNum}` aria-labelledby=`flush-heading${flushNum}` data-mdb-parent="#accordionFlushExampleX")
                             .accordion-body
-                                h3 Title: 
+                                h3 Title:
                                     input(type="text", name="title", value=`${collection.title}`)
                                 h3 Days:
                                 p Monday
                                     if collection.days.monday === true
                                         input(type="checkbox", name="monday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="monday")
                                 p Tuesday
                                     if collection.days.tuesday === true
                                         input(type="checkbox", name="tuesday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="tuesday")
                                 p Wednesday
                                     if collection.days.wednesday === true
                                         input(type="checkbox", name="wednesday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="wednesday")
                                 p Thursday
                                     if collection.days.thursday === true
                                         input(type="checkbox", name="thursday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="thursday")
                                 p Friday
                                     if collection.days.friday === true
                                         input(type="checkbox", name="friday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="friday")
                                 p Saturday
                                     if collection.days.saturday === true
                                         input(type="checkbox", name="saturday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="saturday")
                                 p Sunday
                                     if collection.days.sunday === true
                                         input(type="checkbox", name="sunday" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="sunday")
-                                h3 Times of Day: 
+                                h3 Times of Day:
                                 p Morning
-                                    if collection.time.morning === true 
+                                    if collection.time.morning === true
                                         input(type="checkbox", name="morning" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="morning")
                                 p Afternoon
-                                    if collection.time.afternoon === true 
+                                    if collection.time.afternoon === true
                                         input(type="checkbox", name="afternoon" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="afternoon")
                                 p Evening
-                                    if collection.time.evening === true 
+                                    if collection.time.evening === true
                                         input(type="checkbox", name="evening" checked)
-                                    else 
+                                    else
                                         input(type="checkbox", name="evening")
                             input(type="submit", value="Submit").btn.btn-success.btn-rounded
+
                             a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
-                            
-                        
+            
                 - flushNum = flushNum + 1;
-                
+
         hr
         a.btn.btn-info.btn-rounded(href="/new_video") Let's Make a new one!
 
-    
-        
+
+
 
 
 

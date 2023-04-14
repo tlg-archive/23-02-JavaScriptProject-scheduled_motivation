@@ -23,17 +23,13 @@ case timeOfDay
             div
     default
         #main-content.d-flex.flex-column.justify-content-around.align-items-center.evening
-            div
-            div
-
             .fade-in.mx-3
                 a(href="play/evening") Good Evening, #{user.given_name}. Click to start your wind down.
-            div
-            div
-
             a(href="/play/morning").button-17 Morning
             a(href="/play/afternoon")#afternoon.button-17 Afternoon
             a(href="/play/evening")#evening.button-17 Evening
+            div
+            div
 
 script(src="../scripts/indexHandler.js")
 include partials/footer
