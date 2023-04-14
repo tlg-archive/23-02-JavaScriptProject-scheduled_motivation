@@ -144,4 +144,23 @@ async function updateCollection(userFromDb, collectionTitle, formData){
 
 }
 
-module.exports = { userExists, createUser, createCollection, addNewVideo, extractYoutubeVideoId, updateCollection };
+
+
+function deleteCollection(user, title){
+  UserModel.findOne({ _id: user._id })
+    .then((user) => {
+      const collectionIndex = user.collections.findIndex(collection => collection.title === title);
+      user.collections.splice(collectionIndex, 1);
+      return user.save();
+    })
+}
+
+module.exports = { 
+  userExists, 
+  createUser, 
+  createCollection, 
+  addNewVideo, 
+  extractYoutubeVideoId, 
+  updateCollection,
+  deleteCollection,
+ };

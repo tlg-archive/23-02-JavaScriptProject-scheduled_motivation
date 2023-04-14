@@ -72,11 +72,12 @@ include partials/header
                                         input(type="checkbox", name="evening")
                             input(type="submit", value="Submit").btn.btn-success.btn-rounded
 
-
+                            a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
+            
                 - flushNum = flushNum + 1;
 
         hr
-        a.btn.btn-info.btn-rounded(href="new_video") Let's Make a new one!
+        a.btn.btn-info.btn-rounded(href="/new_video") Let's Make a new one!
 
 
 

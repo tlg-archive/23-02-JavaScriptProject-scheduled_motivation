@@ -139,8 +139,19 @@ app.get("/view_collections", async (req, res) => {
   });
 });
 
+app.get("/delete_collection/:title", async (req, res) => {
+  userFromDb = await getUser(req);
+  await UserCrud.deleteCollection(userFromDb, req.params.title);
+  userFromDb = await getUser(req);
+  res.render("view_collections", {
+    pageTitle: "Your Collections",
+    user: userFromDb,
+    collections: userFromDb.collections,
+  });
+})
 
 app.post("/new_video", async (req, res) => {
+  
   const formData = req.body;
   if (UserCrud.extractYoutubeVideoId(formData.url) === null) {
     res.render("new_video", {
@@ -179,6 +190,7 @@ app.post("/update_collection/:title", async (req, res) => {
     collections: userFromDb.collections,
   });
 });
+
 
 
 
