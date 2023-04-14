@@ -5,10 +5,10 @@ include partials/header
 
 
     div(style="height: 62px; width: 100vw")
-    #collections-container.d-flex.flex-column.bg-image.align-items-center(style="height: 200vh")
-        img(src="../assets/lofi.jpg").w-100
+    #collections-container.d-flex.flex-column.align-items-left(style="height: 200vh; background-color: #f5f5f5")
+        //- img(src="../assets/lofi.jpg").w-100
         - var flushNum = 1
-        .accordion.accordion-borderless#accordionFlushExampleX.mask.mask-custom
+        .accordion.accordion-borderless#accordionFlushExampleX
             for collection in collections
                 .accordion-item
                     form.form-check(action=`update_collection/${collection.title}`, method="POST")
@@ -23,68 +23,71 @@ include partials/header
                                         input.card-text(type="text", name="title", value=`${collection.title}`)
                                     ul.list-group.list-group-light
                                         .row.align-items-center
-                                            .col.center
-                                                h1 Updates 
-                                                h3 Are 
-                                                h5 Overrated
+                                            .col.col-1
+                                                
                                             .col 
                                                 h3 Days:
-                                                li.list-group-item.px3.font-weight-light Monday
+                                                li.px3.font-weight-light Monday
                                                     if collection.days.monday === true
                                                         input.form-check-input(type="checkbox", name="monday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="monday")
-                                                li.list-group-item.px3.font-weight-light Tuesday
+                                                li.px3.font-weight-light Tuesday
                                                     if collection.days.tuesday === true
                                                         input.form-check-input(type="checkbox", name="tuesday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="tuesday")
-                                                li.list-group-item.px3.font-weight-light  Wednesday
+                                                li.px3.font-weight-light  Wednesday
                                                     if collection.days.wednesday === true
                                                         input.form-check-input(type="checkbox", name="wednesday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="wednesday")
-                                                li.list-group-item.px3.font-weight-light  Thursday
+                                                li.px3.font-weight-light  Thursday
                                                     if collection.days.thursday === true
                                                         input.form-check-input(type="checkbox", name="thursday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="thursday")
-                                                li.list-group-item.px3.font-weight-light  Friday
+                                                li.px3.font-weight-light  Friday
                                                     if collection.days.friday === true
                                                         input.form-check-input(type="checkbox", name="friday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="friday")
-                                                li.list-group-item.px3.font-weight-light  Saturday
+                                                li.px3.font-weight-light  Saturday
                                                     if collection.days.saturday === true
                                                         input.form-check-input(type="checkbox", name="saturday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="saturday")
-                                                li.list-group-item.px3.font-weight-light  Sunday
+                                                li.px3.font-weight-light  Sunday
                                                     if collection.days.sunday === true
                                                         input.form-check-input(type="checkbox", name="sunday" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="sunday")
                                             .col 
                                                 h3 Times:
-                                                li.list-group-item.px3.font-weight-light Morning
+                                                li.px3.font-weight-light Morning
                                                     if collection.time.morning === true
                                                         input.form-check-input(type="checkbox", name="morning" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="morning")
-                                                li.list-group-item.px3.font-weight-light Afternoon
+                                                li.px3.font-weight-light Afternoon
                                                     if collection.time.afternoon === true
                                                         input.form-check-input(type="checkbox", name="afternoon" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="afternoon")
-                                                li.list-group-item.px3.font-weight-light Evening
+                                                li.px3.font-weight-light Evening
                                                     if collection.time.evening === true
                                                         input.form-check-input(type="checkbox", name="evening" checked)
                                                     else
                                                         input.form-check-input(type="checkbox", name="evening")
-                                            
-                            button(type="submit", value="Submit").btn.btn-success.btn-rounded Update
+                                    .row.align-items-center
+                                        .col
+                                            button(type="submit", value="Submit").btn.btn-success.btn-rounded Update
+                                        .col
+                                            a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
 
-                            a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
+
+                                            
+
             
                 - flushNum = flushNum + 1;
             a.btn.btn-info.btn-rounded(href="/new_video" style="width:80vw; padding: 20px; margin: 30px;") Let's Make a new one!

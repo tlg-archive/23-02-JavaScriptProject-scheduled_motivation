@@ -16,7 +16,7 @@
   display: inline-flex;
   fill: currentcolor;
   font-family: "Google Sans",Roboto,Arial,sans-serif;
-  font-size: 14px;
+  font-size: large;
   font-weight: 500;
   height: 48px;
   justify-content: center;
@@ -24,7 +24,7 @@
   line-height: normal;
   max-width: 100%;
   overflow: visible;
-  padding: 50px 24px;
+  padding: 40px 15px;
   position: relative;
   text-align: center;
   text-transform: none;
@@ -129,8 +129,9 @@
 .slide-in-blurred-top {
 	-webkit-animation: slide-in-blurred-top 2.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
 	        animation: slide-in-blurred-top 2.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
-  max-width: fit-content;
+  max-width: 60vw;
   margin: 20px;
+  font-size: medium;
 }
 
 /* ----------------------------------------------
@@ -176,8 +177,8 @@
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateY(0) scaleY(2) scaleX(2);
-            transform: translateY(0) scaleY(2) scaleX(2);
+    -webkit-transform: translateY(0) scaleY(1.5) scaleX(1.5);
+            transform: translateY(0) scaleY(1.5) scaleX(1.5);
     -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
     -webkit-filter: blur(0);
