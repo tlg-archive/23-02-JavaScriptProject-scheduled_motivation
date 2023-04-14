@@ -51,6 +51,8 @@ const db = require("./models/mongoose");
 const UserModel = require("./models/UserModel");
 const UserCrud = require("./models/userModelCrud");
 
+console.log('please dont forget to delete me');
+
 var userFromDb = null;
 var getUser;
 
