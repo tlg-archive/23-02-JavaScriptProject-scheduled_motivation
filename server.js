@@ -124,10 +124,11 @@ app.post("/new_collection", async (req, res) => {
   const formData = req.body;
   const videoData = JSON.parse(formData.videoData);
   await UserCrud.createCollection(userFromDb, formData, videoData);
-  res.render("new_video", { 
-    pageTitle: "New Video", 
-    user: userFromDb, 
-    collections: userFromDb.collections});
+  res.redirect('new_video');
+  // res.render("new_video", { 
+  //   pageTitle: "New Video", 
+  //   user: userFromDb, 
+  //   collections: userFromDb.collections});
 });
 
 
@@ -145,11 +146,12 @@ app.get("/delete_collection/:title", async (req, res) => {
   userFromDb = await getUser(req);
   await UserCrud.deleteCollection(userFromDb, req.params.title);
   userFromDb = await getUser(req);
-  res.render("view_collections", {
-    pageTitle: "Your Collections",
-    user: userFromDb,
-    collections: userFromDb.collections,
-  });
+  res.redirect("view_collections");
+  // res.render("view_collections", {
+  //   pageTitle: "Your Collections",
+  //   user: userFromDb,
+  //   collections: userFromDb.collections,
+  // });
 })
 
 app.post("/new_video", async (req, res) => {
@@ -186,11 +188,12 @@ app.post("/update_collection/:title", async (req, res) => {
   userFromDb = await getUser(req);
   const formData = req.body;
   UserCrud.updateCollection(userFromDb, req.params.title, formData);
-  res.render("view_collections", {
-    pageTitle: "Your Collections",
-    user: userFromDb,
-    collections: userFromDb.collections,
-  });
+  res.redirect('/view_collections');
+  // res.render("view_collections", {
+  //   pageTitle: "Your Collections",
+  //   user: userFromDb,
+  //   collections: userFromDb.collections,
+  // });
 });
 
 
