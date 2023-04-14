@@ -4,73 +4,81 @@ include partials/header
 
 
 
-    div(style="height: 70px; width: 100vw")
-    #collections-container.d-flex.flex-column(style="width: 100vw")
+    div(style="height: 62px; width: 100vw")
+    #collections-container.d-flex.flex-column(style="width: 100vw").bg-image
+        img(src="../assets/lofi.jpg").w-100
         - var flushNum = 1
-        .accordion.accordion-borderless#accordionFlushExampleX
+        .accordion.accordion-borderless#accordionFlushExampleX.mask.mask-custom
             for collection in collections
                 .accordion-item
-                    form(action=`update_collection/${collection.title}`, method="POST")
+                    form.form-check(action=`update_collection/${collection.title}`, method="POST")
                         h2.accordion-header(id=`flush-heading${flushNum}`)
                             button.accordion-button(type="button" data-mdb-toggle="collapse" data-mdb-target=`#flush-collapse${flushNum}` aria-expanded="false" aria-controls=`flush-collapse${flushNum}`).
                                 #{collection.title}
                         .accoridon-collapse.collapse(id=`flush-collapse${flushNum}` aria-labelledby=`flush-heading${flushNum}` data-mdb-parent="#accordionFlushExampleX")
                             .accordion-body
-                                h3 Title:
-                                    input(type="text", name="title", value=`${collection.title}`)
-                                h3 Days:
-                                p Monday
-                                    if collection.days.monday === true
-                                        input(type="checkbox", name="monday" checked)
-                                    else
-                                        input(type="checkbox", name="monday")
-                                p Tuesday
-                                    if collection.days.tuesday === true
-                                        input(type="checkbox", name="tuesday" checked)
-                                    else
-                                        input(type="checkbox", name="tuesday")
-                                p Wednesday
-                                    if collection.days.wednesday === true
-                                        input(type="checkbox", name="wednesday" checked)
-                                    else
-                                        input(type="checkbox", name="wednesday")
-                                p Thursday
-                                    if collection.days.thursday === true
-                                        input(type="checkbox", name="thursday" checked)
-                                    else
-                                        input(type="checkbox", name="thursday")
-                                p Friday
-                                    if collection.days.friday === true
-                                        input(type="checkbox", name="friday" checked)
-                                    else
-                                        input(type="checkbox", name="friday")
-                                p Saturday
-                                    if collection.days.saturday === true
-                                        input(type="checkbox", name="saturday" checked)
-                                    else
-                                        input(type="checkbox", name="saturday")
-                                p Sunday
-                                    if collection.days.sunday === true
-                                        input(type="checkbox", name="sunday" checked)
-                                    else
-                                        input(type="checkbox", name="sunday")
-                                h3 Times of Day:
-                                p Morning
-                                    if collection.time.morning === true
-                                        input(type="checkbox", name="morning" checked)
-                                    else
-                                        input(type="checkbox", name="morning")
-                                p Afternoon
-                                    if collection.time.afternoon === true
-                                        input(type="checkbox", name="afternoon" checked)
-                                    else
-                                        input(type="checkbox", name="afternoon")
-                                p Evening
-                                    if collection.time.evening === true
-                                        input(type="checkbox", name="evening" checked)
-                                    else
-                                        input(type="checkbox", name="evening")
-                            input(type="submit", value="Submit").btn.btn-success.btn-rounded
+                                .card 
+                                    .card-body.container
+                                        h3.card-title Title:
+                                        input.card-text(type="text", name="title", value=`${collection.title}`)
+                                    ul.list-group.list-group-light
+                                        .row.align-items-center
+                                            .col 
+                                                h3 Days:
+                                                li.list-group-item.px3.font-weight-light Monday
+                                                    if collection.days.monday === true
+                                                        input.form-check-input(type="checkbox", name="monday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="monday")
+                                                li.list-group-item.px3.font-weight-light Tuesday
+                                                    if collection.days.tuesday === true
+                                                        input.form-check-input(type="checkbox", name="tuesday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="tuesday")
+                                                li.list-group-item.px3.font-weight-light  Wednesday
+                                                    if collection.days.wednesday === true
+                                                        input.form-check-input(type="checkbox", name="wednesday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="wednesday")
+                                                li.list-group-item.px3.font-weight-light  Thursday
+                                                    if collection.days.thursday === true
+                                                        input.form-check-input(type="checkbox", name="thursday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="thursday")
+                                                li.list-group-item.px3.font-weight-light  Friday
+                                                    if collection.days.friday === true
+                                                        input.form-check-input(type="checkbox", name="friday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="friday")
+                                                li.list-group-item.px3.font-weight-light  Saturday
+                                                    if collection.days.saturday === true
+                                                        input.form-check-input(type="checkbox", name="saturday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="saturday")
+                                                li.list-group-item.px3.font-weight-light  Sunday
+                                                    if collection.days.sunday === true
+                                                        input.form-check-input(type="checkbox", name="sunday" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="sunday")
+                                            .col 
+                                                h3 Times of Day:
+                                                li.list-group-item.px3.font-weight-light Morning
+                                                    if collection.time.morning === true
+                                                        input.form-check-input(type="checkbox", name="morning" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="morning")
+                                                li.list-group-item.px3.font-weight-light Afternoon
+                                                    if collection.time.afternoon === true
+                                                        input.form-check-input(type="checkbox", name="afternoon" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="afternoon")
+                                                li.list-group-item.px3.font-weight-light Evening
+                                                    if collection.time.evening === true
+                                                        input.form-check-input(type="checkbox", name="evening" checked)
+                                                    else
+                                                        input.form-check-input(type="checkbox", name="evening")
+                                            
+                            button(type="submit", value="Submit").btn.btn-success.btn-rounded Update
 
                             a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
             

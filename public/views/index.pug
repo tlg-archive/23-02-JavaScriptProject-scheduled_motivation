@@ -4,32 +4,36 @@ include partials/header
 include partials/navbar
 
 div(style="height: 60px; width: 100vw")
-
+//- - timeOfDay = 'morning'
+//- - timeOfDay = 'afternoon'
+//- - timeOfDay = 'evening'
 case timeOfDay
     when 'morning'
-        #main-content.d-flex.flex-column.justify-content-around.align-items-center.morning
-            .fade-in.mx-3
-                a(href="/play/morning") Good Morning, #{user.given_name}. Click to start your morning right.
-            a(href="/play/morning")#morning.button-17 Morning
-            a(href="/play/afternoon")#afternoon.button-17 Afternoon
-            a(href="/play/evening")#evening.button-17 Evening
+        #main-content.bg-image(style='background-image: url("../assets/morning.jpg")')
+            .mask.mask-custom.d-flex.flex-column.justify-content-around.align-items-center
+                div
+                a.button-17.slide-in-blurred-top.ripple(href="/play/morning") Good Morning, #{user.given_name}. Click to start your morning right.
+                a(href="/play/morning")#morning.button-17.ripple Morning
+                a(href="/play/afternoon")#afternoon.button-17.ripple Afternoon
+                a(href="/play/evening")#evening.button-17.ripple Evening
+                div 
     when 'afternoon'
-        #main-content.d-flex.flex-column.justify-content-around.align-items-center.afternoon
-            .fade-in.mx-3
-                a(href="play/afternoon") Good Afternoon, #{user.given_name}.  Let's get you out of that noon slump.
-            a(href="/play/morning")#morning.button-17 Morning
-            a(href="/play/afternoon")#afternoon.button-17 Afternoon
-            a(href="/play/evening")#evening.button-17 Evening
-            div
+        #main-content.bg-image(style='background-image: url("../assets/afternoon.jpg")')
+            .mask.mask-custom.d-flex.flex-column.justify-content-around.align-items-center
+                div
+                a.button-17.slide-in-blurred-top.ripple(href="play/afternoon") Good Afternoon, #{user.given_name}.  Let's get you out of that noon slump.
+                a(href="/play/morning")#morning.button-17.ripple Morning
+                a(href="/play/afternoon")#afternoon.button-17.ripple Afternoon
+                a(href="/play/evening")#evening.button-17.ripple Evening
+                div
     default
-        #main-content.d-flex.flex-column.justify-content-around.align-items-center.evening
-            .fade-in.mx-3
-                a(href="play/evening") Good Evening, #{user.given_name}. Click to start your wind down.
-            a(href="/play/morning").button-17 Morning
-            a(href="/play/afternoon")#afternoon.button-17 Afternoon
-            a(href="/play/evening")#evening.button-17 Evening
-            div
-            div
-
+        #main-content.bg-image(style='background-image: url("../assets/evening.jpg")')
+            .mask.mask-custom.d-flex.flex-column.justify-content-around.align-items-center
+                div 
+                a.button-17.slide-in-blurred-top.ripple(href="play/evening") Good Evening, #{user.given_name}. Click to start your wind down.
+                a(href="/play/morning").button-17.ripple Morning
+                a(href="/play/afternoon")#afternoon.button-17.ripple Afternoon
+                a(href="/play/evening")#evening.button-17.ripple Evening
+                div
 script(src="../scripts/indexHandler.js")
 include partials/footer
