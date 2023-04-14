@@ -5,7 +5,7 @@ include partials/header
 
 
     div(style="height: 62px; width: 100vw")
-    #collections-container.d-flex.flex-column(style="width: 100vw").bg-image
+    #collections-container.d-flex.flex-column(style="height: 100vh").bg-image.align-items-center
         img(src="../assets/lofi.jpg").w-100
         - var flushNum = 1
         .accordion.accordion-borderless#accordionFlushExampleX.mask.mask-custom
@@ -23,6 +23,10 @@ include partials/header
                                         input.card-text(type="text", name="title", value=`${collection.title}`)
                                     ul.list-group.list-group-light
                                         .row.align-items-center
+                                            .col.center
+                                                h1 Updates 
+                                                h3 Are 
+                                                h5 Overrated
                                             .col 
                                                 h3 Days:
                                                 li.list-group-item.px3.font-weight-light Monday
@@ -83,9 +87,7 @@ include partials/header
                             a(href=`/delete_collection/${collection.title}`).btn.btn-danger.btn-rounded Delete
             
                 - flushNum = flushNum + 1;
-
-        hr
-        a.btn.btn-info.btn-rounded(href="/new_video") Let's Make a new one!
+            a.btn.btn-info.btn-rounded(href="/new_video" style="width:80vw; padding: 20px; margin: 30px;") Let's Make a new one!
 
 
 

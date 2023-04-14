@@ -129,7 +129,8 @@
 .slide-in-blurred-top {
 	-webkit-animation: slide-in-blurred-top 2.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
 	        animation: slide-in-blurred-top 2.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
-  padding:5px;
+  max-width: fit-content;
+  margin: 20px;
 }
 
 /* ----------------------------------------------
@@ -155,8 +156,8 @@
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateY(0) scaleY(2) scaleX(2);
-            transform: translateY(0) scaleY(2) scaleX(2);
+    -webkit-transform: translateY(0) scaleY(1.5) scaleX(1.5);
+            transform: translateY(0) scaleY(1.5) scaleX(1.5);
     -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
     -webkit-filter: blur(0);
